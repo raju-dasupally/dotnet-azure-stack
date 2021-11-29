@@ -1,0 +1,47 @@
+version: 0.1.0
+
+name: dotnet-azure-stack
+description: A Stack to deploy dotnet application to azure
+
+branding:
+  icon: 'Azure.svg'
+  color: 'blue'
+  
+inputs:
+  - name: DOTNET_VERSON
+    default: v3.1
+    description: Dotnet version
+    validvalues: 
+    - v2.1
+    - v3.1
+
+configs:
+  repo-metadata:
+    parameters:
+      description: 'Setup dotnet application azure'
+      topics:
+      - dotnet
+      - azure
+      
+  branches:
+    - name: main
+      paramaters:
+        dismiss-stale-reviews: true
+        required-approving-review-count: 2
+        require-code-owner-reviews: true
+  
+  environments: 
+    - name: development
+      parameters: 
+        protected-branches: false
+        custom-branch-policies:
+          - main
+          - releases/*
+          
+github-apps:
+  - name: Code Inspector
+  - name: Sider
+  
+ init: ".github/workflows/stack-init.yaml'
+  
+  
